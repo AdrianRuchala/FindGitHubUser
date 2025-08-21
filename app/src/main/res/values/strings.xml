@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FindGitHubUser</string>
+    <string name="home_screen_text">Find GitHub User</string>
+    <string name="search_user">Search User</string>
+    <string name="search">Search</string>
+    <string name="user_not_found">User not found</string>
+    <string name="user_name_is_null">Type User Name</string>
+</resources>
