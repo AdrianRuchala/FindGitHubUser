@@ -28,7 +28,7 @@ fun AppNavHost(
         }
 
         composable(UserDetails.route) {
-            UserDetailsScreen(modifier, viewModel)
+            UserDetailsScreen(Modifier, viewModel) { navController.navigateUp() }
         }
     }
 }

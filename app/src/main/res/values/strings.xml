@@ -5,4 +5,6 @@
     <string name="search">Search</string>
     <string name="user_not_found">User not found</string>
     <string name="user_name_is_null">Type User Name</string>
+    <string name="user_profile">User Profile</string>
+    <string name="check_repos">Check repositories</string>
 </resources>
