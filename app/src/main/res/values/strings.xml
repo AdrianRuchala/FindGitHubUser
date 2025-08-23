@@ -7,4 +7,21 @@
     <string name="user_name_is_null">Type User Name</string>
     <string name="user_profile">User Profile</string>
     <string name="check_repos">Check repositories</string>
+    <string name="user_id">Id</string>
+    <string name="user_type">Type</string>
+    <string name="user_name">Name</string>
+    <string name="user_company">Company</string>
+    <string name="user_location">Location</string>
+    <string name="user_email">Email</string>
+    <string name="user_hireable">Hireable</string>
+    <string name="unknown">Unknown</string>
+    <string name="user_repos">User Repositories</string>
+    <string name="repo_owner">Owner</string>
+    <string name="repo_private">Private</string>
+    <string name="repo_fork">Fork</string>
+    <string name="repo_stargazers_count">Stargazers Count</string>
+    <string name="repo_watchers_count">Watchers Count</string>
+    <string name="repo_language">Language</string>
+    <string name="repo_forks_count">Forks Count</string>
+    <string name="repo_open_issues_count">Open Issues Count</string>
 </resources>

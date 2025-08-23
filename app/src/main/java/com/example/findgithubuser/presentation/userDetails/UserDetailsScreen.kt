@@ -35,7 +35,12 @@ import com.example.findgithubuser.presentation.AppViewState
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
-fun UserDetailsScreen(modifier: Modifier, viewModel: AppViewModel, onNavigateUp: () -> Unit) {
+fun UserDetailsScreen(
+    modifier: Modifier,
+    viewModel: AppViewModel,
+    navigateToUserRepos: () -> Unit,
+    onNavigateUp: () -> Unit
+) {
     val viewState = viewModel.viewState.value
 
     Column(
@@ -44,7 +49,6 @@ fun UserDetailsScreen(modifier: Modifier, viewModel: AppViewModel, onNavigateUp:
             .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Row(
             modifier
                 .fillMaxWidth()
@@ -67,12 +71,17 @@ fun UserDetailsScreen(modifier: Modifier, viewModel: AppViewModel, onNavigateUp:
 
         HorizontalDivider(modifier.padding(8.dp))
 
-        UserDetails(modifier, viewState)
+        UserDetails(modifier, viewState, viewModel, navigateToUserRepos)
     }
 }
 
 @Composable
-fun UserDetails(modifier: Modifier, viewState: AppViewState) {
+fun UserDetails(
+    modifier: Modifier,
+    viewState: AppViewState,
+    viewModel: AppViewModel,
+    navigateToUserRepos: () -> Unit
+) {
     var userAvatar by remember { mutableStateOf("") }
     var userLogin by remember { mutableStateOf("") }
     var userId by remember { mutableStateOf("") }
@@ -92,6 +101,30 @@ fun UserDetails(modifier: Modifier, viewState: AppViewState) {
     userLocation = viewState.user?.location.toString()
     userEmail = viewState.user?.email.toString()
     userHireable = viewState.user?.hireable.toString()
+
+    if (userType == "null") {
+        userType = stringResource(R.string.unknown)
+    }
+
+    if (userName == "null") {
+        userName = stringResource(R.string.unknown)
+    }
+
+    if (userCompany == "null") {
+        userCompany = stringResource(R.string.unknown)
+    }
+
+    if (userLocation == "null") {
+        userLocation = stringResource(R.string.unknown)
+    }
+
+    if (userEmail == "null") {
+        userEmail = stringResource(R.string.unknown)
+    }
+
+    if (userHireable == "null") {
+        userHireable = stringResource(R.string.unknown)
+    }
 
     Column(
         modifier
@@ -115,6 +148,87 @@ fun UserDetails(modifier: Modifier, viewState: AppViewState) {
 
         HorizontalDivider(modifier.padding(8.dp))
 
+        Column(
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+            Text(stringResource(R.string.user_id), style = MaterialTheme.typography.labelLarge)
+            Text(userId, style = MaterialTheme.typography.bodyLarge)
+        }
+
+        Column(
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+            Text(
+                stringResource(R.string.user_name),
+                style = MaterialTheme.typography.labelLarge
+            )
+            Text(userName, style = MaterialTheme.typography.bodyLarge)
+        }
+
+        Column(
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+            Text(
+                stringResource(R.string.user_email),
+                style = MaterialTheme.typography.labelLarge
+            )
+            Text(userEmail, style = MaterialTheme.typography.bodyLarge)
+        }
+
+        Column(
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+            Text(
+                stringResource(R.string.user_type),
+                style = MaterialTheme.typography.labelLarge
+            )
+            Text(userType, style = MaterialTheme.typography.bodyLarge)
+        }
+
+        Column(
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+            Text(
+                stringResource(R.string.user_company),
+                style = MaterialTheme.typography.labelLarge
+            )
+            Text(userCompany, style = MaterialTheme.typography.bodyLarge)
+        }
+
+        Column(
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+            Text(
+                stringResource(R.string.user_location),
+                style = MaterialTheme.typography.labelLarge
+            )
+            Text(userLocation, style = MaterialTheme.typography.bodyLarge)
+        }
+
+        Column(
+            modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp)
+        ) {
+            Text(
+                stringResource(R.string.user_hireable),
+                style = MaterialTheme.typography.labelLarge
+            )
+            Text(userHireable, style = MaterialTheme.typography.bodyLarge)
+        }
+
         Row(
             modifier
                 .fillMaxWidth()
@@ -123,7 +237,10 @@ fun UserDetails(modifier: Modifier, viewState: AppViewState) {
                 .clip(CircleShape)
                 .background(color = MaterialTheme.colorScheme.primaryContainer)
                 .padding(horizontal = 12.dp)
-                .clickable { },
+                .clickable {
+                    viewModel.getUserRepos(userLogin)
+                    navigateToUserRepos()
+                },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {

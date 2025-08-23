@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import com.example.findgithubuser.presentation.AppViewModel
 import com.example.findgithubuser.presentation.home.HomeScreen
 import com.example.findgithubuser.presentation.userDetails.UserDetailsScreen
+import com.example.findgithubuser.presentation.userRepos.UserReposScreen
 
 @Composable
 fun AppNavHost(
@@ -28,7 +29,18 @@ fun AppNavHost(
         }
 
         composable(UserDetails.route) {
-            UserDetailsScreen(Modifier, viewModel) { navController.navigateUp() }
+            UserDetailsScreen(
+                Modifier,
+                viewModel,
+                { navController.navigateSingleTopTo(UserRepos.route) },
+                { navController.navigateUp() })
+        }
+
+        composable(UserRepos.route) {
+            UserReposScreen(
+                Modifier,
+                viewModel
+            ) { navController.navigateSingleTopTo(UserDetails.route) }
         }
     }
 }

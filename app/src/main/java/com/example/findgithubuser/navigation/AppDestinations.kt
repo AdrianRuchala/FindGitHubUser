@@ -11,3 +11,7 @@ object Home : AppDestinations {
 object UserDetails: AppDestinations {
     override val route = "user_details"
 }
+
+object UserRepos: AppDestinations {
+    override val route = "user_repos"
+}
